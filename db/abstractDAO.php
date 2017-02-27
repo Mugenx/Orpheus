@@ -13,7 +13,6 @@ class abstractDAO {
     /* Name of database */
     protected static $DB_DATABASE = "Orpheus";
 
-
     /*
      * Constructor. Instantiates a new MySQLi object.
      * Throws an exception if there is an issue connecting

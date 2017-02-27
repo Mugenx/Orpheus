@@ -26,7 +26,7 @@ class Equipment{
 
 	function __construct(
 		$EuipmentRecordID,
-		$EquipmentTag, 
+		$EquipmentTag,
 		$Name,
 		$ShortName,
 		$SerialNo,
@@ -239,7 +239,7 @@ class Equipment{
 		$this->SSMA_TimeStamp = $SSMA_TimeStamp;
 	}
 
-	
+
 	// public function getChange(){
 	// 		return $this->Change;
 	// 	}
@@ -250,4 +250,3 @@ class Equipment{
 
 }
 ?>
-

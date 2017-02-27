@@ -1,10 +1,10 @@
 <?php include 'header.php'; ?>
-<?php require_once('db/modelDAO.php'); ?>
+<?php require_once('controller/controller.php'); ?>
 
-<div class="equitable">
+<div class="equitable" align="center">
   <?php
   try{
-    $modelDAO = new modelDAO();
+    $modelDAO = new Controller();
     $equipments = $modelDAO->getEquipment();
     if($equipments){
       //We only want to output the table if we have customer.
@@ -65,6 +65,30 @@
   }
 
   ?>
+
+    <ul class="pagination">
+    				<li>
+    					<a href="#">Prev</a>
+    				</li>
+    				<li>
+    					<a href="list.php?page=1">1</a>
+    				</li>
+    				<li>
+    					<a href="list.php?page=2">2</a>
+    				</li>
+    				<li>
+    					<a href="list.php?page=3">3</a>
+    				</li>
+    				<li>
+    					<a href="list.php?page=4">4</a>
+    				</li>
+    				<li>
+    					<a href="list.php?page=5">5</a>
+    				</li>
+    				<li>
+    					<a href="#">Next</a>
+    				</li>
+    			</ul>
 
 </div>
 <?php include 'footer.php'; ?>
