@@ -48,23 +48,23 @@
         $servername = 'localhost';
         $username   = 'wp_eatery';
         $password   = 'password';
-        $dbname     = 'loansystemtest';
+        $dbname     = 'alms';
 
         $conn = new mysqli($servername, $username, $password, $dbname);
         //------------------------------------------------------------//
 
         //--------------------------GET STUDENT INFO FROM DATABASE-------------------------//
-        $studentInfoQuery  = "SELECT * FROM tUsers WHERE fStudentNumber = 040828055";
+        $studentInfoQuery  = "SELECT * FROM Users WHERE StudentNumber = 040828055";
         $studentInfoResult = $conn->query($studentInfoQuery);
         while ($row = $studentInfoResult->fetch_assoc()) {
-            $studentNumber = $row['fStudentNumber'];
-            $userName      = $row['fUserName'];
-            $firstName     = $row['fFirstName'];
-            $lastName      = $row['fLastName'];
-            $email         = $row['fEmail'];
-            $program       = $row['fProgram'];
-            $year          = $row['fYear'];
-            $notes         = $row['fNotes'];
+            $studentNumber = $row['StudentNumber'];
+            $userName      = $row['UserName'];
+            $firstName     = $row['FirstName'];
+            $lastName      = $row['LastName'];
+            $email         = $row['Email'];
+            $program       = $row['Program'];
+            $year          = $row['Year'];
+            $notes         = $row['Notes'];
         }
         //--------------------------------------------------------------------------------//
     ?>
@@ -107,16 +107,16 @@
                 <!-Data of student's loaned equipment will go here->
                 <?php
 
-                    $loansQuery  = "SELECT tEquipment.fName, tLoanedOut.fEquipmentTag, tLoanedOut.fStudentNumber, tLoanedOut.fDueDate 
-                                    FROM   tEquipment, tLoanedOut
-                                    WHERE  tEquipment.fEquipmentTag = tLoanedOut.fEquipmentTag 
-                                    AND    tLoanedOut.fStudentNumber = '$studentNumber'";
+                    $loansQuery  = "SELECT Equipment.Name, LoanedOut.EquipmentTag, LoanedOut.StudentNumber, LoanedOut.DueDate 
+                                    FROM   Equipment, LoanedOut
+                                    WHERE  Equipment.EquipmentTag = LoanedOut.EquipmentTag 
+                                    AND    LoanedOut.StudentNumber = '$studentNumber'";
                     $loansResult = $conn->query($loansQuery);
                     while($row = mysqli_fetch_array($loansResult)){
                         echo "<tr>
-                              <td>".$row["fEquipmentTag"]."</td>
-                              <td>".$row["fName"]        ."</td>
-                              <td>".$row["fDueDate"]     ."</td>
+                              <td>".$row["EquipmentTag"]."</td>
+                              <td>".$row["Name"]        ."</td>
+                              <td>".$row["DueDate"]     ."</td>
                               </tr>";
                     }
 
@@ -140,24 +140,24 @@
                 </thead>
                 <?php
 
-                    $reserveQuery  = "SELECT fCategoryName, fReserveStart, fReserveEnd, fApproved, fDenied, fDeniedReason 
-                                      FROM   tReservations, tCategoryTree 
-                                      WHERE  tCategoryTree.fCategoryID = tReservations.fCategoryID 
-                                      AND    tReservations.fStudentNumber = '$studentNumber'";
+                    $reserveQuery  = "SELECT CategoryName, ReserveStart, ReserveEnd, Approved, Denied, DeniedReason 
+                                      FROM   Reservations, CategoryTree 
+                                      WHERE  CategoryTree.CategoryID = Reservations.CategoryID 
+                                      AND    Reservations.StudentNumber = '$studentNumber'";
                     $reserveResult = $conn->query($reserveQuery);
                     while($row = mysqli_fetch_array($reserveResult)){
                         echo "<tr>
-                              <td>".$row["fCategoryName"]."</td>
-                              <td>".$row["fReserveStart"]."</td>
-                              <td>".$row["fReserveEnd"]  ."</td>
+                              <td>".$row["CategoryName"]."</td>
+                              <td>".$row["ReserveStart"]."</td>
+                              <td>".$row["ReserveEnd"]  ."</td>
                               <td>";
-                        if($row["fApproved"] == 1){
+                        if($row["Approved"] == 1){
                             //If reservation is approved
                             echo  "Approved </td><td> N/A </td></tr>";
                         }
                         else if($row["fDenied"] == 1){
                             //If reservation is denied
-                            echo "Denied </td><td>" . $row["fDeniedReason"]. "</td></tr>";
+                            echo "Denied </td><td>" . $row["DeniedReason"]. "</td></tr>";
                         }
                         else{
                             //If neither of the above are true, reservation is pending

@@ -52,7 +52,7 @@
         $servername = 'localhost';
         $username   = 'wp_eatery';
         $password   = 'password';
-        $dbname     = 'loansystemtest';
+        $dbname     = 'alms';
 
         $conn = new mysqli($servername, $username, $password, $dbname);
         //------------------------------------------------------------//
@@ -76,24 +76,24 @@
             $studentNumTemp  = $_POST['studentNum'];
 
             if($studentNumTemp != NULL){
-                $studentInfoQuery  = "SELECT * FROM tUsers WHERE fStudentNumber = '$studentNumTemp'";
+                $studentInfoQuery  = "SELECT * FROM Users WHERE StudentNumber = '$studentNumTemp'";
                 $studentInfoResult = $conn->query($studentInfoQuery);
                 while ($row = $studentInfoResult->fetch_assoc()) {
-                    $studentNumber = $row['fStudentNumber'];
-                    $userName      = $row['fUserName'];
-                    $firstName     = $row['fFirstName'];
-                    $lastName      = $row['fLastName'];
-                    $email         = $row['fEmail'];
-                    $program       = $row['fProgram'];
-                    $year          = $row['fYear'];
-                    $enabled       = $row['fEnabled'];
-                    $loanAdmin     = $row['fLoanAdmin'];
-                    $approver      = $row['fApprover'];
-                    $notes         = $row['fNotes'];
+                    $studentNumber = $row['StudentNumber'];
+                    $userName      = $row['UserName'];
+                    $firstName     = $row['FirstName'];
+                    $lastName      = $row['LastName'];
+                    $email         = $row['Email'];
+                    $program       = $row['Program'];
+                    $year          = $row['Year'];
+                    $enabled       = $row['Enabled'];
+                    $loanAdmin     = $row['LoanAdmin'];
+                    $approver      = $row['Approver'];
+                    $notes         = $row['Notes'];
 
                     //This will be used if the admin changes the student number
                     //to preserve the original student number 
-                    $_SESSION["studentNumberSession"] = $row['fStudentNumber'];
+                    $_SESSION["studentNumberSession"] = $row['StudentNumber'];
                 }
             }
         }
@@ -130,18 +130,18 @@
                 $approverNew = 0;
             }
 
-            $sql = "UPDATE tUsers SET
-                    fUserName      = ?,
-                    fFirstName     = ?,
-                    fLastName      = ?,
-                    fEmail         = ?,
-                    fProgram       = ?,
-                    fYear          = ?,
-                    fEnabled       = ?,
-                    fLoanAdmin     = ?,
-                    fApprover      = ?,
-                    fNotes         = ?
-                    WHERE fStudentNumber = ?";
+            $sql = "UPDATE Users SET
+                    UserName      = ?,
+                    FirstName     = ?,
+                    LastName      = ?,
+                    Email         = ?,
+                    Program       = ?,
+                    Year          = ?,
+                    Enabled       = ?,
+                    LoanAdmin     = ?,
+                    Approver      = ?,
+                    Notes         = ?
+                    WHERE StudentNumber = ?";
 
             if($stmt = $conn->prepare($sql)){
                 $stmt->bind_param("ssssiiiiisi", 
@@ -200,11 +200,11 @@
                 <select id="program" name="program" class="studinfo">
                     <?php 
                         if($program != NULL){
-                            $sql = mysqli_query($conn, "SELECT fProgramID, fProgramName FROM tPrograms");
+                            $sql = mysqli_query($conn, "SELECT ProgramID, ProgramName FROM Programs");
                             while ($row = $sql->fetch_assoc()){
                                 unset($programID, $programName);
-                                $programID = $row['fProgramID'];
-                                $programName = $row['fProgramName']; 
+                                $programID = $row['ProgramID'];
+                                $programName = $row['ProgramName']; 
                                 if($programID == $program){
                                     echo '<option selected value="'.$programID.'">'.$programName.'</option>';
                                 }
