@@ -51,7 +51,7 @@
         $servername = 'localhost';
         $username   = 'wp_eatery';
         $password   = 'password';
-        $dbname     = 'loansystemtest';
+        $dbname     = 'alms';
 
         $conn = new mysqli($servername, $username, $password, $dbname);
         //------------------------------------------------------------//
@@ -88,7 +88,7 @@
                 $approver = 0;
             }
 
-            $sql  = "INSERT INTO tUsers (fStudentNumber, fUserName, fFirstName, fLastName, fEmail, fProgram, fYear, fEnabled, fLoanAdmin, fApprover, fNotes) 
+            $sql  = "INSERT INTO Users (StudentNumber, UserName, FirstName, LastName, Email, Program, Year, Enabled, LoanAdmin, Approver, Notes) 
                      VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
             if($stmt = $conn->prepare($sql)){
@@ -139,11 +139,11 @@
                 <label>Program:</label>
                 <select name="program" class="studinfo">
                     <?php 
-                        $sql = mysqli_query($conn, "SELECT fProgramID, fProgramName FROM tPrograms");
+                        $sql = mysqli_query($conn, "SELECT ProgramID, ProgramName FROM Programs");
                         while ($row = $sql->fetch_assoc()){
                             unset($programID, $programName);
-                            $programID = $row['fProgramID'];
-                            $programName = $row['fProgramName']; 
+                            $programID = $row['ProgramID'];
+                            $programName = $row['ProgramName']; 
                             echo '<option value="'.$programID.'">'.$programName.'</option>';
                         }
                     ?>
