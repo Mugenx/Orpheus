@@ -53,33 +53,24 @@ session_start();
 </div>
 
 <?php
-
 error_reporting(E_ALL ^ E_WARNING);
-
 $servername = "localhost";
 $username = "username";
 $password = "password";
 $dbname = "alms";
-
 $conn = new mysqli($servername, $username, $password, $dbname);
-
-
 if($conn->connect_error)
 {
   die("Connection failed: " . $conn->connect_error);
 }
-
-
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
   $LoginUserName = $_POST['username'];
   $LoginPassword = $_POST['password'];
-
   $sql = "SELECT Approver, Enabled, LastName, LoanAdmin, UserName, StudentNumber FROM users WHERE UserName = '$LoginUserName'";
   $result = $conn->query($sql);
   $row = mysqli_fetch_array($result);
   $count = mysqli_num_rows($result);
-
   if($count < 1 || !$row['Enabled'] || $row['LastName'] != $LoginPassword)
   {
     echo "<p align = 'center'>Invalid username or password<p>";
@@ -90,11 +81,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     $_SESSION['admin'] = $row['LoanAdmin'];
     $_SESSION['approver'] = $row['Approver'];
     $_SESSION['student_number'] = $row['StudentNumber'];
-
     header("location: loan.php");
   }
 }
-
 ?>
 
 
