@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +48,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.php" style="color: white">Orpheus</a>
+        <a class="navbar-brand" href="loan.php" style="color: white">Orpheus</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -70,10 +73,10 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li><a href="myAccount.php">My Account</a></li>
-                    <li><a href="index.php">Logout</a></li>
+                    <li><a href="logout.php">Logout</a></li>
                   </ul>
                 </li>
-                <li><a href="index.php"><span class="glyphicon glyphicon-log-out"></span></a></li>
+                <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span></a></li>
               </ul>
 
           </li>
